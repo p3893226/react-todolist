@@ -56,7 +56,6 @@ const RedFilterButton = styled(FilterAllButton)`
 function List({ todos, setTodos, filterTodos, setFilterTodos }) {
   const handleFilterValue = (e) => {
     const { classList } = e.target;
-    console.log(classList);
     if (!classList.contains("button-switch")) return;
     setFilterTodos((filterTodos) => {
       if (classList.contains("show-all")) {
