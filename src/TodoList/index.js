@@ -24,7 +24,10 @@ const StyledTitle = styled.h1`
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
-  const [filterTodos, setFilterTodos] = useState();
+  const [filterTodos, setFilterTodos] = useState({
+    style: "show-all",
+    filterValue: null,
+  });
 
   return (
     <StyledFormwrapper>

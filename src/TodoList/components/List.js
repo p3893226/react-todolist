@@ -3,10 +3,14 @@ import Item from "./Item";
 
 const ListWrapper = styled.div``;
 
-const FilterButton = styled.button`
+const FilterAllButton = styled.button`
   cursor: pointer;
-  border: 1px solid rgb(214, 214, 214);
-  color: rgb(75, 75, 75);
+  border: ${(props) =>
+    props.filterFocus === "show-all"
+      ? "transparent;"
+      : "1px solid rgb(214, 214, 214);"}
+  color: ${(props) =>
+    props.filterFocus === "show-all" ? "#60c983;" : "rgb(75, 75, 75);"}
   outline: none;
   background: transparent;
   width: 100%;
@@ -26,12 +30,54 @@ const FilterButton = styled.button`
   }
 `;
 
-const RedFilterButton = styled(FilterButton)`
-&:hover {
-  color: #bb001c;
+const FilterActiveButton = styled(FilterAllButton)`
+  border: ${(props) =>
+    props.filterFocus === "show-active"
+      ? "transparent;"
+      : "1px solid rgb(214, 214, 214);"}
+  color: ${(props) =>
+    props.filterFocus === "show-active" ? "#60c983;" : "rgb(75, 75, 75);"}
+`;
+
+const FilterCompletedButton = styled(FilterAllButton)`
+  border: ${(props) =>
+    props.filterFocus === "show-completed"
+      ? "transparent;"
+      : "1px solid rgb(214, 214, 214);"}
+  color: ${(props) =>
+    props.filterFocus === "show-completed" ? "#60c983;" : "rgb(75, 75, 75);"}
+`;
+
+const RedFilterButton = styled(FilterAllButton)`
+  &:hover {
+    color: #bb001c;
 `;
 
 function List({ todos, setTodos, filterTodos, setFilterTodos }) {
+  const handleFilterValue = (e) => {
+    const { classList } = e.target;
+    console.log(classList);
+    if (!classList.contains("button-switch")) return;
+    setFilterTodos((filterTodos) => {
+      if (classList.contains("show-all")) {
+        return {
+          style: "show-all",
+          filterValue: null,
+        };
+      } else if (classList.contains("show-active")) {
+        return {
+          style: "show-active",
+          filterValue: true,
+        };
+      } else {
+        return {
+          style: "show-completed",
+          filterValue: false,
+        };
+      }
+    });
+  };
+
   const handleDeleteAll = () => {
     setTodos(() => {
       return [];
@@ -40,33 +86,30 @@ function List({ todos, setTodos, filterTodos, setFilterTodos }) {
 
   return (
     <>
-      <ListWrapper>
-        <FilterButton
-          onClick={() => {
-            setFilterTodos(null);
-          }}
+      <ListWrapper onClick={handleFilterValue}>
+        <FilterAllButton
+          filterFocus={filterTodos.style}
+          className="show-all button-switch"
         >
           ALL
-        </FilterButton>
-        <FilterButton
-          onClick={() => {
-            setFilterTodos(true);
-          }}
+        </FilterAllButton>
+        <FilterActiveButton
+          filterFocus={filterTodos.style}
+          className="show-active button-switch"
         >
           Active
-        </FilterButton>
-        <FilterButton
-          onClick={() => {
-            setFilterTodos(false);
-          }}
+        </FilterActiveButton>
+        <FilterCompletedButton
+          filterFocus={filterTodos.style}
+          className="show-completed button-switch"
         >
           Done
-        </FilterButton>
+        </FilterCompletedButton>
         <RedFilterButton onClick={handleDeleteAll}>Delete All</RedFilterButton>
       </ListWrapper>
       {todos
         .filter((todo) => {
-          return todo.isDone !== filterTodos;
+          return todo.isDone !== filterTodos.filterValue;
         })
         .map((todo) => {
           const { id, isDone, content } = todo;

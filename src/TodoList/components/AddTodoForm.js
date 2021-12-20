@@ -65,7 +65,7 @@ const StyledDivider = styled.div`
 function AddTodoForm({ setTodos }) {
   const [value, setValue] = useState("");
 
-  const id = useRef(1);
+  const id = useRef(0);
   const handleInputChange = (e) => {
     setValue(e.target.value);
   };

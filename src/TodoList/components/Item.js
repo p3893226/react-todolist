@@ -70,7 +70,7 @@ const StyledDeleteButton = styled.button`
 `;
 
 function Item({ id, isDone, content, setTodos }) {
-  const handleCheckboxClick = () => {
+  const handleCheckboxClick = (e) => {
     setTodos((todos) => {
       return todos.map((todo) => {
         if (todo.id !== id) return todo;
@@ -91,8 +91,8 @@ function Item({ id, isDone, content, setTodos }) {
 
   return (
     <Todo key={id}>
-      <StyledTodoItem>
-        <StyledLabel onClick={handleCheckboxClick}>
+      <StyledTodoItem onClick={handleCheckboxClick}>
+        <StyledLabel>
           <StyledInputCheckbox type="checkbox" defaultChecked={isDone} />
           <span>{content}</span>
         </StyledLabel>
