@@ -53,76 +53,53 @@ const RedFilterButton = styled(FilterAllButton)`
     color: #bb001c;
 `;
 
-function List({ todos, setTodos, filterTodos, setFilterTodos }) {
-  const handleFilterValue = (e) => {
-    const { classList } = e.target;
-    if (!classList.contains("button-switch")) return;
-    setFilterTodos((filterTodos) => {
-      if (classList.contains("show-all")) {
-        return {
-          style: "show-all",
-          filterValue: null,
-        };
-      } else if (classList.contains("show-active")) {
-        return {
-          style: "show-active",
-          filterValue: true,
-        };
-      } else {
-        return {
-          style: "show-completed",
-          filterValue: false,
-        };
-      }
+function List({
+  todos,
+  filterData,
+  handleFilterData,
+  handleDeleteAll,
+  handleDeleteTodo,
+  handleCheckboxClick,
+}) {
+  const todoListItems = todos
+    .filter((todo) => {
+      return todo.isDone !== filterData.filterValue;
+    })
+    .map((todo) => {
+      return (
+        <Item
+          key={todo.id}
+          todo={todo}
+          handleDeleteTodo={handleDeleteTodo}
+          handleCheckboxClick={handleCheckboxClick}
+        />
+      );
     });
-  };
-
-  const handleDeleteAll = () => {
-    setTodos(() => {
-      return [];
-    });
-  };
 
   return (
     <>
-      <ListWrapper onClick={handleFilterValue}>
+      <ListWrapper onClick={handleFilterData}>
         <FilterAllButton
-          filterFocus={filterTodos.style}
+          filterFocus={filterData.style}
           className="show-all button-switch"
         >
           ALL
         </FilterAllButton>
         <FilterActiveButton
-          filterFocus={filterTodos.style}
+          filterFocus={filterData.style}
           className="show-active button-switch"
         >
           Active
         </FilterActiveButton>
         <FilterCompletedButton
-          filterFocus={filterTodos.style}
+          filterFocus={filterData.style}
           className="show-completed button-switch"
         >
           Done
         </FilterCompletedButton>
         <RedFilterButton onClick={handleDeleteAll}>Delete All</RedFilterButton>
       </ListWrapper>
-      {todos
-        .filter((todo) => {
-          return todo.isDone !== filterTodos.filterValue;
-        })
-        .map((todo) => {
-          const { id, isDone, content } = todo;
-          return (
-            <Item
-              key={id}
-              id={id}
-              isDone={isDone}
-              content={content}
-              todos={todos}
-              setTodos={setTodos}
-            />
-          );
-        })}
+      {todoListItems}
     </>
   );
 }

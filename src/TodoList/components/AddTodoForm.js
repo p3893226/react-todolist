@@ -62,30 +62,7 @@ const StyledDivider = styled.div`
   margin: 8px auto;
 `;
 
-function AddTodoForm({ setTodos }) {
-  const [value, setValue] = useState("");
-
-  const id = useRef(0);
-  const handleInputChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  const handleAddTodos = () => {
-    if (!value) return;
-    setTodos((Todos) => {
-      return [
-        {
-          id: id.current,
-          content: value,
-          isDone: false,
-        },
-        ...Todos,
-      ];
-    });
-    id.current++;
-    setValue("");
-  };
-
+function AddTodoForm({ value, handleAddTodo, handleInputChange }) {
   return (
     <>
       <StyledInputWrapper>
@@ -96,7 +73,7 @@ function AddTodoForm({ setTodos }) {
           placeholder="Add New Todo Here..."
           size="30"
         />
-        <StyledButton onClick={handleAddTodos} />
+        <StyledButton onClick={handleAddTodo} />
       </StyledInputWrapper>
       <StyledDivider />
     </>

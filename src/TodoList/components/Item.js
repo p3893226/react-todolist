@@ -69,35 +69,27 @@ const StyledDeleteButton = styled.button`
   }
 `;
 
-function Item({ id, isDone, content, setTodos }) {
-  const handleCheckboxClick = (e) => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        if (todo.id !== id) return todo;
-        return {
-          ...todo,
-          isDone: !isDone,
-        };
-      });
-    });
+function Item({ todo, handleDeleteTodo, handleCheckboxClick }) {
+  const { id, isDone, content } = todo;
+  const deleteClick = () => {
+    handleDeleteTodo(id);
   };
-
-  const handleDeleteClick = () => {
-    setTodos((todos) => {
-      const result = todos.filter((todo) => todo.id !== id);
-      return result;
-    });
+  const CheckboxClick = () => {
+    handleCheckboxClick(id);
   };
-
   return (
     <Todo key={id}>
-      <StyledTodoItem onClick={handleCheckboxClick}>
+      <StyledTodoItem>
         <StyledLabel>
-          <StyledInputCheckbox type="checkbox" defaultChecked={isDone} />
+          <StyledInputCheckbox
+            onClick={CheckboxClick}
+            type="checkbox"
+            defaultChecked={isDone}
+          />
           <span>{content}</span>
         </StyledLabel>
       </StyledTodoItem>
-      <StyledDeleteButton onClick={handleDeleteClick} />
+      <StyledDeleteButton onClick={deleteClick} />
     </Todo>
   );
 }
