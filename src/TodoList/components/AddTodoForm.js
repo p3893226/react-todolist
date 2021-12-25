@@ -62,12 +62,18 @@ const StyledDivider = styled.div`
 `;
 
 function AddTodoForm({ value, handleAddTodo, handleInputChange }) {
+  const enterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleAddTodo();
+    }
+  };
   return (
     <>
       <StyledInputWrapper>
         <StyledTodoInput
           value={value}
           onChange={handleInputChange}
+          onKeyPress={enterKeyPress}
           type="text"
           placeholder="Add New Todo Here..."
           size="30"

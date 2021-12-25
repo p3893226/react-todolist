@@ -19,7 +19,7 @@ function useTodos() {
   };
 
   const handleAddTodo = () => {
-    if (!value) return;
+    if (value.trim().length === 0) return;
     setTodos((Todos) => {
       return [
         {

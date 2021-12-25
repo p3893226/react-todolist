@@ -49,12 +49,18 @@ function EditTodoForm({
   const updateClick = () => {
     handleUpdateClick(currentTodo);
   };
+  const enterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleUpdateClick(currentTodo);
+    }
+  };
   return (
     <>
       <StyledInputWrapper>
         <StyledTodoInput
           value={currentTodo.content}
           onChange={handleEditInputChange}
+          onKeyPress={enterKeyPress}
           type="text"
           placeholder="Add New Todo Here..."
           size="30"
