@@ -6,7 +6,7 @@ const StyledTodoInput = styled.input`
   border: 1px solid rgb(167, 166, 166);
   font-size: 130%;
   line-height: 1.15;
-  max-width: 500px;
+  min-width: 200px;
 
   &::placeholder {
     color: rgb(150, 150, 150);
@@ -25,8 +25,8 @@ const StyledButton = styled.button`
   border: 1px solid rgb(214, 214, 214);
   outline: none;
   background: transparent;
-  width: 40px;
-  height: 40px;
+  min-width: 30px;
+  min-height: 30px;
   border-radius: 50%;
   margin: 0px 10px;
 

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Item from "./Item";
 
-const ListWrapper = styled.div``;
+const ListWrapper = styled.div`
+  display: flex;
+`;
 
 const FilterAllButton = styled.button`
   cursor: pointer;

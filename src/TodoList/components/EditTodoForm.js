@@ -7,7 +7,7 @@ const StyledTodoInput = styled.input`
   border: 1px solid rgb(167, 166, 166);
   font-size: 130%;
   line-height: 1.15;
-  max-width: 500px;
+  min-width: 200px;
 
   &::placeholder {
     color: rgb(150, 150, 150);
@@ -24,8 +24,8 @@ const StyledInputWrapper = styled.div`
 const StyledUpdate = styled(UpdateIcon)`
   cursor: pointer;
   padding-top: 3px;
-  width: 30px;
-  height: 30px;
+  max-width: 30px;
+  max-height: 30px;
   margin: 0px 10px;
   fill: #a2a2a2;
   :hover {
