@@ -1,10 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 
 function useTodos() {
-  const id = useRef(0);
   const [value, setValue] = useState("");
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    return localStorage.getItem("todos")
+      ? JSON.parse(localStorage.getItem("todos"))
+      : [];
+  });
 
   const [filterData, setFilterData] = useState({
     style: "show-all",
@@ -13,6 +16,10 @@ function useTodos() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -23,14 +30,13 @@ function useTodos() {
     setTodos((Todos) => {
       return [
         {
-          id: id.current,
+          id: new Date(),
           content: value,
           isDone: false,
         },
         ...Todos,
       ];
     });
-    id.current++;
     setValue("");
   };
 
@@ -104,7 +110,6 @@ function useTodos() {
   };
 
   return {
-    id,
     value,
     todos,
     currentTodo,
