@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ReactComponent as EditIcon } from "../images/pencil.svg";
 
 const Todo = styled.div`
   display: flex;
@@ -34,6 +35,23 @@ const StyledInputCheckbox = styled.input`
     color: grey;
   }
 `;
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  width: 70px;
+  height: 20px;
+`;
+
+const StyledEditButton = styled(EditIcon)`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  fill: rgb(162, 162, 162);
+  :hover {
+    fill: #60c983;
+    transition: 0.3s;
+  }
+`;
 
 const StyledDeleteButton = styled.button`
   width: 20px;
@@ -49,7 +67,7 @@ const StyledDeleteButton = styled.button`
   &:before {
     content: "";
     background: rgb(162, 162, 162);
-    width: 16px;
+    width: 20px;
     height: 1px;
     position: absolute;
   }
@@ -69,27 +87,38 @@ const StyledDeleteButton = styled.button`
   }
 `;
 
-function Item({ todo, handleDeleteTodo, handleCheckboxClick }) {
+function Item({
+  todo,
+  handleDeleteTodo,
+  handleCheckboxClick,
+  handleEditClick,
+}) {
   const { id, isDone, content } = todo;
   const deleteClick = () => {
     handleDeleteTodo(id);
   };
-  const CheckboxClick = () => {
+  const checkboxClick = () => {
     handleCheckboxClick(id);
+  };
+  const editClick = () => {
+    handleEditClick(todo);
   };
   return (
     <Todo key={id}>
       <StyledTodoItem>
         <StyledLabel>
           <StyledInputCheckbox
-            onClick={CheckboxClick}
+            onClick={checkboxClick}
             type="checkbox"
             defaultChecked={isDone}
           />
           <span>{content}</span>
         </StyledLabel>
       </StyledTodoItem>
-      <StyledDeleteButton onClick={deleteClick} />
+      <StyledButtonWrapper>
+        <StyledEditButton onClick={editClick} />
+        <StyledDeleteButton onClick={deleteClick} />
+      </StyledButtonWrapper>
     </Todo>
   );
 }

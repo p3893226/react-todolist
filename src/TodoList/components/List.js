@@ -60,6 +60,7 @@ function List({
   handleDeleteAll,
   handleDeleteTodo,
   handleCheckboxClick,
+  handleEditClick,
 }) {
   const todoListItems = todos
     .filter((todo) => {
@@ -72,6 +73,7 @@ function List({
           todo={todo}
           handleDeleteTodo={handleDeleteTodo}
           handleCheckboxClick={handleCheckboxClick}
+          handleEditClick={handleEditClick}
         />
       );
     });

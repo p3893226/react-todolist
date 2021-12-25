@@ -1,4 +1,5 @@
 import AddTodoForm from "./components/AddTodoForm";
+import EditTodoForm from "./components/EditTodoForm";
 import List from "./components/List";
 import styled from "styled-components";
 import useTodos from "./hooks/useTodos";
@@ -25,23 +26,36 @@ function TodoList() {
   const {
     value,
     todos,
+    currentTodo,
     filterData,
+    isEditing,
     handleInputChange,
     handleAddTodo,
     handleDeleteTodo,
     handleDeleteAll,
     handleFilterData,
     handleCheckboxClick,
+    handleEditClick,
+    handleEditInputChange,
+    handleUpdateClick,
   } = useTodos();
 
   return (
     <StyledFormwrapper>
       <StyledTitle>Todo-List</StyledTitle>
-      <AddTodoForm
-        value={value}
-        handleInputChange={handleInputChange}
-        handleAddTodo={handleAddTodo}
-      />
+      {isEditing ? (
+        <EditTodoForm
+          currentTodo={currentTodo}
+          handleEditInputChange={handleEditInputChange}
+          handleUpdateClick={handleUpdateClick}
+        />
+      ) : (
+        <AddTodoForm
+          value={value}
+          handleInputChange={handleInputChange}
+          handleAddTodo={handleAddTodo}
+        />
+      )}
       <List
         todos={todos}
         filterData={filterData}
@@ -49,6 +63,7 @@ function TodoList() {
         handleDeleteAll={handleDeleteAll}
         handleDeleteTodo={handleDeleteTodo}
         handleCheckboxClick={handleCheckboxClick}
+        handleEditClick={handleEditClick}
       />
     </StyledFormwrapper>
   );

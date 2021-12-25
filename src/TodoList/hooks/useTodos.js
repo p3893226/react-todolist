@@ -11,6 +11,9 @@ function useTodos() {
     filterValue: true,
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
+
   const handleInputChange = (e) => {
     setValue(e.target.value);
   };
@@ -78,17 +81,44 @@ function useTodos() {
     });
   };
 
+  const handleEditClick = (todo) => {
+    setIsEditing(true);
+    setCurrentTodo({ ...todo });
+  };
+
+  const handleEditInputChange = (e) => {
+    setCurrentTodo({ ...currentTodo, content: e.target.value });
+  };
+
+  const handleUpdateClick = (currentTodo) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        if (todo.id !== currentTodo.id) return todo;
+        return {
+          ...todo,
+          content: currentTodo.content,
+        };
+      });
+    });
+    setIsEditing(false);
+  };
+
   return {
     id,
     value,
     todos,
+    currentTodo,
     filterData,
+    isEditing,
     handleInputChange,
     handleAddTodo,
     handleDeleteTodo,
     handleDeleteAll,
     handleFilterData,
     handleCheckboxClick,
+    handleEditClick,
+    handleEditInputChange,
+    handleUpdateClick,
   };
 }
 

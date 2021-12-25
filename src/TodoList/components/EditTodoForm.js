@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ReactComponent as UpdateIcon } from "../images/refresh.svg";
 
 const StyledTodoInput = styled.input`
   border-radius: 10px;
@@ -20,37 +21,16 @@ const StyledInputWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledButton = styled.button`
+const StyledUpdate = styled(UpdateIcon)`
   cursor: pointer;
-  border: 1px solid rgb(214, 214, 214);
-  outline: none;
-  background: transparent;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  padding-top: 3px;
+  width: 30px;
+  height: 30px;
   margin: 0px 10px;
-
-  &:after,
-  &:before {
-    content: "";
-    background: rgb(162, 162, 162);
-    width: 20px;
-    height: 1px;
-    position: absolute;
-  }
-
-  &:hover:after,
-  :hover:before {
-    background: #60c983;
-    transition: 0.3s;
-  }
-
-  :before {
-    transform: translate(-50%, -50%);
-  }
-
-  :after {
-    transform: translate(-50%, -50%) rotate(90deg);
+  fill: #a2a2a2;
+  :hover {
+    transform: rotate(-135deg);
+    transition: all 0.5s ease;
   }
 `;
 
@@ -61,22 +41,29 @@ const StyledDivider = styled.div`
   margin: 8px auto;
 `;
 
-function AddTodoForm({ value, handleAddTodo, handleInputChange }) {
+function EditTodoForm({
+  currentTodo,
+  handleEditInputChange,
+  handleUpdateClick,
+}) {
+  const updateClick = () => {
+    handleUpdateClick(currentTodo);
+  };
   return (
     <>
       <StyledInputWrapper>
         <StyledTodoInput
-          value={value}
-          onChange={handleInputChange}
+          value={currentTodo.content}
+          onChange={handleEditInputChange}
           type="text"
           placeholder="Add New Todo Here..."
           size="30"
         />
-        <StyledButton onClick={handleAddTodo} />
+        <StyledUpdate onClick={updateClick} />
       </StyledInputWrapper>
       <StyledDivider />
     </>
   );
 }
 
-export default AddTodoForm;
+export default EditTodoForm;
