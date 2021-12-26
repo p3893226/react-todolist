@@ -56,6 +56,7 @@ function useTodos() {
     setTodos(() => {
       return [];
     });
+    setIsEditing(false);
   };
 
   const handleFilterData = (e) => {
