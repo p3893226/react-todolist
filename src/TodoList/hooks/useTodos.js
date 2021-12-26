@@ -50,6 +50,7 @@ function useTodos() {
       const result = todos.filter((todo) => todo.id !== id);
       return result;
     });
+    setIsEditing(false);
   };
 
   const handleDeleteAll = () => {
@@ -79,6 +80,7 @@ function useTodos() {
         };
       }
     });
+    setIsEditing(false);
   };
 
   const handleCheckboxClick = (id) => {
