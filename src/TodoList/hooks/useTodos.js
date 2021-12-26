@@ -24,7 +24,7 @@ function useTodos() {
 
   useEffect(() => {
     if (isEditing) inputRef.current.focus();
-  }, [isEditing]);
+  }, [isEditing, currentTodo]);
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -102,7 +102,7 @@ function useTodos() {
   };
 
   const handleUpdateClick = (currentTodo) => {
-    if (value.trim().length === 0) {
+    if (currentTodo.content.trim().length === 0) {
       alert(`
     Please don't leave blank`);
     } else {
