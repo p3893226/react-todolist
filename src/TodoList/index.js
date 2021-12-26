@@ -29,6 +29,7 @@ function TodoList() {
     currentTodo,
     filterData,
     isEditing,
+    inputRef,
     handleInputChange,
     handleAddTodo,
     handleDeleteTodo,
@@ -48,6 +49,7 @@ function TodoList() {
           currentTodo={currentTodo}
           handleEditInputChange={handleEditInputChange}
           handleUpdateClick={handleUpdateClick}
+          inputRef={inputRef}
         />
       ) : (
         <AddTodoForm

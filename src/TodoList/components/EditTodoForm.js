@@ -45,6 +45,7 @@ function EditTodoForm({
   currentTodo,
   handleEditInputChange,
   handleUpdateClick,
+  inputRef,
 }) {
   const updateClick = () => {
     handleUpdateClick(currentTodo);
@@ -61,8 +62,9 @@ function EditTodoForm({
           value={currentTodo.content}
           onChange={handleEditInputChange}
           onKeyPress={enterKeyPress}
+          ref={inputRef}
           type="text"
-          placeholder="Add New Todo Here..."
+          placeholder=" Update Todo Here..."
           size="30"
         />
         <StyledUpdate onClick={updateClick} />

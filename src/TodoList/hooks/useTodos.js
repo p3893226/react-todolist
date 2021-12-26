@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function useTodos() {
+  const inputRef = useRef(null);
   const [value, setValue] = useState("");
 
   const [todos, setTodos] = useState(() => {
@@ -20,6 +21,10 @@ function useTodos() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    if (isEditing) inputRef.current.focus();
+  }, [isEditing]);
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
@@ -97,15 +102,20 @@ function useTodos() {
   };
 
   const handleUpdateClick = (currentTodo) => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        if (todo.id !== currentTodo.id) return todo;
-        return {
-          ...todo,
-          content: currentTodo.content,
-        };
+    if (value.trim().length === 0) {
+      alert(`
+    Please don't leave blank`);
+    } else {
+      setTodos((todos) => {
+        return todos.map((todo) => {
+          if (todo.id !== currentTodo.id) return todo;
+          return {
+            ...todo,
+            content: currentTodo.content,
+          };
+        });
       });
-    });
+    }
     setIsEditing(false);
   };
 
@@ -115,6 +125,7 @@ function useTodos() {
     currentTodo,
     filterData,
     isEditing,
+    inputRef,
     handleInputChange,
     handleAddTodo,
     handleDeleteTodo,
