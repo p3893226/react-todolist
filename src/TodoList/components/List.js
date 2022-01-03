@@ -58,7 +58,9 @@ const RedFilterButton = styled(FilterAllButton)`
 function List({
   todos,
   filterData,
-  handleFilterData,
+  handleFilterAll,
+  handleFilterActive,
+  handleFilterCompleted,
   handleDeleteAll,
   handleDeleteTodo,
   handleCheckboxClick,
@@ -82,22 +84,22 @@ function List({
 
   return (
     <>
-      <ListWrapper onClick={handleFilterData}>
+      <ListWrapper>
         <FilterAllButton
+          onClick={handleFilterAll}
           filterFocus={filterData.style}
-          className="show-all button-switch"
         >
           ALL
         </FilterAllButton>
         <FilterActiveButton
+          onClick={handleFilterActive}
           filterFocus={filterData.style}
-          className="show-active button-switch"
         >
           Active
         </FilterActiveButton>
         <FilterCompletedButton
+          onClick={handleFilterCompleted}
           filterFocus={filterData.style}
-          className="show-completed button-switch"
         >
           Done
         </FilterCompletedButton>

@@ -60,25 +60,30 @@ function useTodos() {
     setIsEditing(false);
   };
 
-  const handleFilterData = (e) => {
-    const { classList } = e.target;
-    if (!classList.contains("button-switch")) return;
+  const handleFilterAll = (e) => {
     setFilterData((filterTodos) => {
-      if (classList.contains("show-all")) {
-        return {
-          style: "show-all",
-        };
-      } else if (classList.contains("show-active")) {
-        return {
-          style: "show-active",
-          filterValue: true,
-        };
-      } else {
-        return {
-          style: "show-completed",
-          filterValue: false,
-        };
-      }
+      return {
+        style: "show-all",
+      };
+    });
+    setIsEditing(false);
+  };
+  const handleFilterActive = (e) => {
+    setFilterData((filterTodos) => {
+      return {
+        style: "show-active",
+        filterValue: true,
+      };
+    });
+    setIsEditing(false);
+  };
+
+  const handleFilterCompleted = (e) => {
+    setFilterData((filterTodos) => {
+      return {
+        style: "show-completed",
+        filterValue: false,
+      };
     });
     setIsEditing(false);
   };
@@ -133,7 +138,9 @@ function useTodos() {
     handleAddTodo,
     handleDeleteTodo,
     handleDeleteAll,
-    handleFilterData,
+    handleFilterAll,
+    handleFilterActive,
+    handleFilterCompleted,
     handleCheckboxClick,
     handleEditClick,
     handleEditInputChange,
