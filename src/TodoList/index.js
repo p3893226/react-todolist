@@ -34,7 +34,9 @@ function TodoList() {
     handleAddTodo,
     handleDeleteTodo,
     handleDeleteAll,
-    handleFilterData,
+    handleFilterAll,
+    handleFilterActive,
+    handleFilterCompleted,
     handleCheckboxClick,
     handleEditClick,
     handleEditInputChange,
@@ -61,7 +63,9 @@ function TodoList() {
       <List
         todos={todos}
         filterData={filterData}
-        handleFilterData={handleFilterData}
+        handleFilterAll={handleFilterAll}
+        handleFilterActive={handleFilterActive}
+        handleFilterCompleted={handleFilterCompleted}
         handleDeleteAll={handleDeleteAll}
         handleDeleteTodo={handleDeleteTodo}
         handleCheckboxClick={handleCheckboxClick}
