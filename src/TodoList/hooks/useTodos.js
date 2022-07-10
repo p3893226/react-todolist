@@ -1,6 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, createContext, useContext } from "react";
 
-function useTodos() {
+const TodoContext = createContext();
+export const useTodos = () => useContext(TodoContext);
+
+export default function TodoProvider({ children }) {
   const inputRef = useRef(null);
   const [value, setValue] = useState("");
 
@@ -126,26 +129,29 @@ function useTodos() {
     }
     setIsEditing(false);
   };
-
-  return {
-    value,
-    todos,
-    currentTodo,
-    filterData,
-    isEditing,
-    inputRef,
-    handleInputChange,
-    handleAddTodo,
-    handleDeleteTodo,
-    handleDeleteAll,
-    handleFilterAll,
-    handleFilterActive,
-    handleFilterCompleted,
-    handleCheckboxClick,
-    handleEditClick,
-    handleEditInputChange,
-    handleUpdateClick,
-  };
+  return (
+    <TodoContext.Provider
+      value={{
+        value,
+        todos,
+        currentTodo,
+        filterData,
+        isEditing,
+        inputRef,
+        handleInputChange,
+        handleAddTodo,
+        handleDeleteTodo,
+        handleDeleteAll,
+        handleFilterAll,
+        handleFilterActive,
+        handleFilterCompleted,
+        handleCheckboxClick,
+        handleEditClick,
+        handleEditInputChange,
+        handleUpdateClick,
+      }}
+    >
+      {children}
+    </TodoContext.Provider>
+  );
 }
-
-export default useTodos;

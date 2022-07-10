@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Item from "./Item";
+import { useTodos } from "../hooks/useTodos";
 
 const ListWrapper = styled.div`
   display: flex;
@@ -55,17 +56,19 @@ const RedFilterButton = styled(FilterAllButton)`
     color: #bb001c;
 `;
 
-function List({
-  todos,
-  filterData,
-  handleFilterAll,
-  handleFilterActive,
-  handleFilterCompleted,
-  handleDeleteAll,
-  handleDeleteTodo,
-  handleCheckboxClick,
-  handleEditClick,
-}) {
+function List() {
+  const {
+    todos,
+    filterData,
+    handleFilterAll,
+    handleFilterActive,
+    handleFilterCompleted,
+    handleDeleteAll,
+    handleDeleteTodo,
+    handleCheckboxClick,
+    handleEditClick,
+  } = useTodos();
+
   const todoListItems = todos
     .filter((todo) => {
       return todo.isDone !== filterData.filterValue;

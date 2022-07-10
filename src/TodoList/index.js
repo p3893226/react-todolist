@@ -2,7 +2,7 @@ import AddTodoForm from "./components/AddTodoForm";
 import EditTodoForm from "./components/EditTodoForm";
 import List from "./components/List";
 import styled from "styled-components";
-import useTodos from "./hooks/useTodos";
+import { useTodos } from "./hooks/useTodos";
 
 const StyledFormwrapper = styled.div`
   padding: 30px 20px;

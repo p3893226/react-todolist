@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as UpdateIcon } from "../images/refresh.svg";
+import { useTodos } from "../hooks/useTodos";
 
 const StyledTodoInput = styled.input`
   border-radius: 10px;
@@ -41,12 +42,10 @@ const StyledDivider = styled.div`
   margin: 8px auto;
 `;
 
-function EditTodoForm({
-  currentTodo,
-  handleEditInputChange,
-  handleUpdateClick,
-  inputRef,
-}) {
+function EditTodoForm() {
+  const { currentTodo, handleEditInputChange, handleUpdateClick, inputRef } =
+    useTodos();
+
   const updateClick = () => {
     handleUpdateClick(currentTodo);
   };

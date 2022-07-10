@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTodos } from "../hooks/useTodos";
 
 const StyledTodoInput = styled.input`
   border-radius: 10px;
@@ -61,7 +62,8 @@ const StyledDivider = styled.div`
   margin: 8px auto;
 `;
 
-function AddTodoForm({ value, handleAddTodo, handleInputChange }) {
+function AddTodoForm() {
+  const { value, handleAddTodo, handleInputChange } = useTodos();
   const enterKeyPress = (e) => {
     if (e.key === "Enter") {
       handleAddTodo();

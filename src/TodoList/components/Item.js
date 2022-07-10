@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as EditIcon } from "../images/pencil.svg";
+import { useTodos } from "../hooks/useTodos";
 
 const Todo = styled.div`
   display: flex;
@@ -87,12 +88,8 @@ const StyledDeleteButton = styled.button`
   }
 `;
 
-function Item({
-  todo,
-  handleDeleteTodo,
-  handleCheckboxClick,
-  handleEditClick,
-}) {
+function Item({ todo }) {
+  const { handleDeleteTodo, handleCheckboxClick, handleEditClick } = useTodos();
   const { id, isDone, content } = todo;
   const deleteClick = () => {
     handleDeleteTodo(id);
