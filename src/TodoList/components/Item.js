@@ -89,8 +89,8 @@ const StyledDeleteButton = styled.button`
 `;
 
 function Item({ todo }) {
-  const { handleDeleteTodo, handleCheckboxClick, handleEditClick } = useTodos();
   const { id, isDone, content } = todo;
+  const { handleDeleteTodo, handleCheckboxClick, handleEditClick } = useTodos();
   const deleteClick = () => {
     handleDeleteTodo(id);
   };
