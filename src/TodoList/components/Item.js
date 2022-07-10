@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useCallback } from "react";
 import { ReactComponent as EditIcon } from "../images/pencil.svg";
 import { useTodos } from "../hooks/useTodos";
 
@@ -91,15 +92,15 @@ const StyledDeleteButton = styled.button`
 function Item({ todo }) {
   const { id, isDone, content } = todo;
   const { handleDeleteTodo, handleCheckboxClick, handleEditClick } = useTodos();
-  const deleteClick = () => {
+  const deleteClick = useCallback(() => {
     handleDeleteTodo(id);
-  };
-  const checkboxClick = () => {
+  }, [handleDeleteTodo, id]);
+  const checkboxClick = useCallback(() => {
     handleCheckboxClick(id);
-  };
-  const editClick = () => {
+  }, [handleCheckboxClick, id]);
+  const editClick = useCallback(() => {
     handleEditClick(todo);
-  };
+  }, [handleEditClick, todo]);
   return (
     <Todo key={id}>
       <StyledTodoItem>

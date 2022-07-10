@@ -23,54 +23,12 @@ const StyledTitle = styled.h1`
 `;
 
 function TodoList() {
-  const {
-    value,
-    todos,
-    currentTodo,
-    filterData,
-    isEditing,
-    inputRef,
-    handleInputChange,
-    handleAddTodo,
-    handleDeleteTodo,
-    handleDeleteAll,
-    handleFilterAll,
-    handleFilterActive,
-    handleFilterCompleted,
-    handleCheckboxClick,
-    handleEditClick,
-    handleEditInputChange,
-    handleUpdateClick,
-  } = useTodos();
-
+  const { isEditing } = useTodos();
   return (
     <StyledFormwrapper>
       <StyledTitle>Todo-List</StyledTitle>
-      {isEditing ? (
-        <EditTodoForm
-          currentTodo={currentTodo}
-          handleEditInputChange={handleEditInputChange}
-          handleUpdateClick={handleUpdateClick}
-          inputRef={inputRef}
-        />
-      ) : (
-        <AddTodoForm
-          value={value}
-          handleInputChange={handleInputChange}
-          handleAddTodo={handleAddTodo}
-        />
-      )}
-      <List
-        todos={todos}
-        filterData={filterData}
-        handleFilterAll={handleFilterAll}
-        handleFilterActive={handleFilterActive}
-        handleFilterCompleted={handleFilterCompleted}
-        handleDeleteAll={handleDeleteAll}
-        handleDeleteTodo={handleDeleteTodo}
-        handleCheckboxClick={handleCheckboxClick}
-        handleEditClick={handleEditClick}
-      />
+      {isEditing ? <EditTodoForm /> : <AddTodoForm />}
+      <List />
     </StyledFormwrapper>
   );
 }

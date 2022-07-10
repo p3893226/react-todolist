@@ -64,9 +64,6 @@ function List() {
     handleFilterActive,
     handleFilterCompleted,
     handleDeleteAll,
-    handleDeleteTodo,
-    handleCheckboxClick,
-    handleEditClick,
   } = useTodos();
 
   const todoListItems = todos
@@ -74,15 +71,7 @@ function List() {
       return todo.isDone !== filterData.filterValue;
     })
     .map((todo) => {
-      return (
-        <Item
-          key={todo.id}
-          todo={todo}
-          handleDeleteTodo={handleDeleteTodo}
-          handleCheckboxClick={handleCheckboxClick}
-          handleEditClick={handleEditClick}
-        />
-      );
+      return <Item key={todo.id} todo={todo} />;
     });
 
   return (

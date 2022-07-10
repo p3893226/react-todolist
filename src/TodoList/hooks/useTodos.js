@@ -1,4 +1,11 @@
-import { useState, useEffect, useRef, createContext, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  createContext,
+  useContext,
+  useCallback,
+} from "react";
 
 const TodoContext = createContext();
 export const useTodos = () => useContext(TodoContext);
@@ -33,7 +40,7 @@ export default function TodoProvider({ children }) {
     setValue(e.target.value);
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = useCallback(() => {
     if (value.trim().length === 0) return;
     setTodos((Todos) => {
       return [
@@ -46,7 +53,7 @@ export default function TodoProvider({ children }) {
       ];
     });
     setValue("");
-  };
+  }, [value]);
 
   const handleDeleteTodo = (id) => {
     setTodos((todos) => {

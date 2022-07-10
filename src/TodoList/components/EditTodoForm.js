@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useCallback } from "react";
 import { ReactComponent as UpdateIcon } from "../images/refresh.svg";
 import { useTodos } from "../hooks/useTodos";
 
@@ -46,9 +47,9 @@ function EditTodoForm() {
   const { currentTodo, handleEditInputChange, handleUpdateClick, inputRef } =
     useTodos();
 
-  const updateClick = () => {
+  const updateClick = useCallback(() => {
     handleUpdateClick(currentTodo);
-  };
+  }, [handleUpdateClick, currentTodo]);
   const enterKeyPress = (e) => {
     if (e.key === "Enter") {
       handleUpdateClick(currentTodo);
